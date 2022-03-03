@@ -34,6 +34,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Mapster, Version=5.0.0.0, Culture=neutral, PublicKeyToken=2f39883af23c29a8, processorArchitecture=MSIL">
+      <HintPath>..\packages\Mapster.5.0.0\lib\net45\Mapster.dll</HintPath>
+    </Reference>
+    <Reference Include="Mapster.DependencyInjection, Version=1.0.0.0, Culture=neutral, PublicKeyToken=e64997d676a9c1d3, processorArchitecture=MSIL">
+      <HintPath>..\packages\Mapster.DependencyInjection.1.0.0\lib\net45\Mapster.DependencyInjection.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.1.1.1\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
     </Reference>
@@ -290,6 +296,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="JobContext.cs" />
+    <Compile Include="JobListingServiceImpl\JobListingService.cs" />
+    <Compile Include="JobListingsService\IJobListing.cs" />
     <Compile Include="Migrations\20220228191748_init.cs" />
     <Compile Include="Migrations\20220228191748_init.designer.cs">
       <DependentUpon>20220228191748_init.cs</DependentUpon>
