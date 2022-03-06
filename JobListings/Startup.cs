@@ -6,16 +6,19 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace JobListings
@@ -46,11 +49,44 @@ namespace JobListings
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             #endregion
 
+            //Cross enbale
+            #region CrossOrgin
+            services.AddCors(options =>
+            {
+                // TODO: W domyœlnym srodowisku nie powinno siê zezwalaæ na tak¹ konfiguracjê.
+                options.AddPolicy("AllowAll",
+                    p => p.SetIsOriginAllowed(_ =>
+                    {
+                        return true;
+                    })
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+                    .AllowCredentials());
+            });
+            #endregion
 
+            #region mvc
+            services.AddMvc(options =>
+            {
+                options.OutputFormatters.RemoveType<TextOutputFormatter>();
+                options.OutputFormatters.RemoveType<StringOutputFormatter>();
+                options.OutputFormatters.RemoveType<HttpNoContentOutputFormatter>();
+
+            }).AddJsonOptions(options =>
+            {
+                options.JsonSerializerOptions.DictionaryKeyPolicy = JsonNamingPolicy.CamelCase;
+                options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
+            }).SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
+           
+            #endregion
+
+            #region DB connection
             services.AddDbContext<JobContext>();
+            #endregion
 
+            #region Services
             services.AddTransient<IJobListing, JobListingService>();
-
+            #endregion
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -66,6 +102,14 @@ namespace JobListings
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            // global cors policy
+            app.UseCors(x => x
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .SetIsOriginAllowed(origin => true) // allow any origin
+                .AllowCredentials()); // allow credentials
+
 
             app.UseAuthorization();
 

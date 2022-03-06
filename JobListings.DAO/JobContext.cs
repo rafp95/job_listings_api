@@ -14,7 +14,7 @@ namespace JobListings.DAO
         {
         }
 
-        public DbSet<JobListing> JobListing { get; set; }
+        public virtual DbSet<JobListing> JobListing { get; set; }
 
     }
 }
