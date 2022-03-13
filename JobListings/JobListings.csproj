@@ -2,18 +2,22 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <UserSecretsId>541b6a85-be77-4ab5-8ea5-98106bf7e6d4</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="JsonObjectSerializer" Version="0.7.6" />
     <PackageReference Include="Mapster" Version="5.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Abstractions" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="5.0.7" />
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="4.1.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.22" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.22" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.22">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="6.0.0" />
     <PackageReference Include="NLog" Version="4.7.14" />
     <PackageReference Include="NLog.EntityFramework" Version="1.0.0" />
     <PackageReference Include="NLog.Extensions.Logging" Version="1.7.4" />

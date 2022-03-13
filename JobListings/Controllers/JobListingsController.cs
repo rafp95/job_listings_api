@@ -1,4 +1,5 @@
 ﻿using Api.Domain;
+using Api.Domain.DTO;
 using JobListings.DAO.JobListingsService;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -49,6 +50,18 @@ namespace JobListings.Controllers
                 return NotFound();
             }
             return Ok(await this._jobListing.UpdateJobListing(jobListing, result));
+        }
+
+        [HttpPost]
+        [Route("DeleteJobListing")]
+        public async Task<ActionResult> DeleteJobListing([FromBody] GuidRequest request)
+        {
+            JobListing jobListing = await this._jobListing.GetJobListing(request.id);
+            if (jobListing == null)
+            {
+                return NotFound();
+            }
+            return Ok(await this._jobListing.DeleteJobListing(jobListing));
         }
 
     }

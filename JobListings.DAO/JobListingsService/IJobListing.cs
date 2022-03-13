@@ -13,6 +13,8 @@ namespace JobListings.DAO.JobListingsService
         Task<JobListing> CreateJobListing(JobListing jobListing);
         Task<JobListing> UpdateJobListing(JobListing jobListing, JobListing jobListingToUpdate);
         Task<JobListing> GetJobListing(Guid id);
+        Task<bool> JobListingExist(Guid id);
+        Task<JobListing> DeleteJobListing(JobListing jobListing);
        
     }
 }

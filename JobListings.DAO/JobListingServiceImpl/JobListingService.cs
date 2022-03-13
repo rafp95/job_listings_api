@@ -21,8 +21,14 @@ namespace JobListings.DAO.JobListingServiceImpl
 
         public async Task<JobListing> CreateJobListing(JobListing jobListing)
         {
-
             await this._jobContext.AddAsync(jobListing);
+            await this._jobContext.SaveChangesAsync();
+            return jobListing;
+        }
+
+        public async Task<JobListing> DeleteJobListing(JobListing jobListing)
+        {
+            this._jobContext.JobListing.Remove(jobListing);
             await this._jobContext.SaveChangesAsync();
             return jobListing;
         }
@@ -35,6 +41,11 @@ namespace JobListings.DAO.JobListingServiceImpl
         public async Task<IEnumerable<JobListing>> GetJobListings()
         {
             return await this._jobContext.JobListing.ToListAsync();
+        }
+
+        public async Task<bool> JobListingExist(Guid id)
+        {
+            return await this._jobContext.JobListing.AnyAsync(_ => _.Id == id);
         }
 
         public async Task<JobListing> UpdateJobListing(JobListing jobListing, JobListing jobListingToUpdate)
