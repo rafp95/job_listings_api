@@ -342,6 +342,10 @@
     <Compile Include="Migrations\20220313115722_rename prop.designer.cs">
       <DependentUpon>20220313115722_rename prop.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\20220317184657_add-prop-city.cs" />
+    <Compile Include="Migrations\20220317184657_add-prop-city.designer.cs">
+      <DependentUpon>20220317184657_add-prop-city.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\JobContextModelSnapshot.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

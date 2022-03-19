@@ -35,14 +35,14 @@ namespace JobListings.Controllers
         
         [HttpPost]
         [Route("AddJobListing")]
-        public async Task<ActionResult> CreateJobListing(JobListing jobListing)
+        public async Task<ActionResult> CreateJobListing([FromBody]JobListing jobListing)
         {
             return Ok(await this._jobListing.CreateJobListing(jobListing));
         }
 
         [HttpPost]
         [Route("UpdateJobListing")]
-        public async Task<ActionResult> UpdateJobListing(JobListing jobListing)
+        public async Task<ActionResult> UpdateJobListing([FromBody] JobListing jobListing)
         {
             var result = await this._jobListing.GetJobListing(jobListing.Id);
             if(result == null)
